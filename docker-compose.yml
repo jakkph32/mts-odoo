@@ -1,0 +1,42 @@
+---
+name: odoo
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: odoo
+      POSTGRES_DB: postgres
+      POSTGRES_HOST: localhost
+    user: root
+    ports:
+      - 5432:5432
+    restart: unless-stopped
+    volumes:
+        - ./postgresql:/var/lib/postgresql/data
+    networks:
+      - odoo
+
+  odoo:
+    image: odoo:18
+    container_name: odoo
+    user: root
+    tty: true
+    environment:
+      HOST: postgres
+      USER: odoo
+      PASSWORD: odoo
+    volumes:
+      - ./addons:/mnt/extra-addons
+      - ./etc:/etc/odoo
+    networks:
+      - odoo
+    restart: unless-stopped
+
+networks:
+  odoo:
+    driver: bridge
+    name: odoo
+    driver_opts:
+      binding_ipv4: "127.0.0.1"
