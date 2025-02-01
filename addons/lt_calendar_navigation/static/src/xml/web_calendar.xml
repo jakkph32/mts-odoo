@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<templates xml:space="preserve">
-    <t t-name="lt_calendar_enhancement.CalendarPopover.footer" t-inherit="calendar.AttendeeCalendarCommonPopover.footer" t-inherit-mode="extension" owl="1">
-        <xpath expr="//t[@t-if='displayAttendeeAnswerChoice']" position="after">
-            <a href="#" class="btn btn-secondary" t-on-click="onClickNavigateTo">Navigate to</a>
-        </xpath>
-    </t>
-</templates>
